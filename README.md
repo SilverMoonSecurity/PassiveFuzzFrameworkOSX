@@ -1,4 +1,5 @@
 1. What is it
+
   This framework is for fuzzing OSX kernel vulnerability based on passive inline hook mechanism in kernel mode.
 Basically, it is a typical kernel driver which inline-hooked import API related to IOKit framework and kernel service.
 You could collect kernel dump and reproduce the vulnerability if kernel crash happens.
@@ -13,11 +14,13 @@ https://pacsec.jp/speakers.html
   Special thanks to fG!
 
 2. Requirement for running
+
   In principle, the passive fuzzing framework could support popular OSX version for Mac Pro,Air. 
   As our experience, there kernel revision from 10.11 to 10.11.6 cause little or non interference to passive fuzzing. 
   The framework has been tested on 10.11.6 MacPro with KDK_10.11.6_15G31.kdk.
 
 3. How to use 
+
 3.1 Quick Start
 	If you want to try the passive fuzz just for fun, please quick try like this:
 	a. Load driver for  quick passive fuzz
