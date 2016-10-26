@@ -12,10 +12,13 @@ The source code is to be released after our presentation "Active fuzzing as comp
 
 https://pacsec.jp/speakers.html
  
-  The passive fuzzing framework is based on “the_flying_circus” rootkit for OSX by fG!
- (A Mountain Lion rootkit for Phrack #69! Copyright (c) fG!, 2012, 2013 - reverser@put.as - http://reverse.put.as All rights reserved.)
+   
+   The passive fuzzing framework is based on “the_flying_circus” rootkit for OSX by fG! Special thanks to fG!
+ 
+   (A Mountain Lion rootkit for Phrack #69! Copyright (c) fG!, 2012, 2013 - reverser@put.as - http://reverse.put.as All rights reserved.)
 
-  Special thanks to fG!
+  
+
 
 2. Requirement for running
   
