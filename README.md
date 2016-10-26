@@ -33,7 +33,7 @@ https://pacsec.jp/speakers.html
             sh-3.2# cp -fr /Library/Developer/KDKs/KDK_10.11.6_15G31.kdk/System/Library/Kernels/kernel.development* /System/Library/Kernels/
             sh-3.2# kextcache -invalid /
             sh-3.2# reboot
-        III. Set up boot-args
+        III. Set up boot-args 
             sh-3.2# nvram boot-args="debug=0x566 kdp_match_name=firewire fwkdp=0x8000 pmuflags=1 kext-dev-mode=1  -v"
             sh-3.2# reboot
 
