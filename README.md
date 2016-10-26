@@ -1,6 +1,5 @@
 1. What is it
-
-  This framework is for fuzzing OSX kernel vulnerability based on passive inline hook mechanism in kernel mode.
+    This framework is for fuzzing OSX kernel vulnerability based on passive inline hook mechanism in kernel mode.
 Basically, it is a typical kernel driver which inline-hooked import API related to IOKit framework and kernel service.
 You could collect kernel dump and reproduce the vulnerability if kernel crash happens.
 You can follow my twitter: @Flyic (of moony li)to more info in detail.
