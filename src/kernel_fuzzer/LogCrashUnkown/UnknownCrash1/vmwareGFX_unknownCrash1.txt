@@ -1,0 +1,56 @@
+(lldb) showcurrentstacks
+
+Processor 0xffffff800b8ef658 cpu_id  0x0 State RUNNING     
+task                 vm_map               ipc_space            #acts flags    pid       process             io_policy  wq_state  command             
+0xffffff8012749d08   0xffffff80125f9690   0xffffff8010da2188       5 D        140   0xffffff80125e6c20              Q -1 -1 -1    WindowServer        
+	thread                   thread_id  processor            base   pri    sched_mode      io_policy       state    ast          wait_queue                       wait_event           wmesg                thread_name         
+	0xffffff80134b9ce0       0x324      0xffffff800b8ef658   79     79     fixed                           R                                                                                                                    
+	Backtrace:
+	kernel_stack = 0xffffff800fb80000
+	stacktop = 0xffffff800fb83950
+	0xffffff800fb83950 0xffffff800af0e058 kernel.development`memcpy + 0x8 
+	0xffffff800fb83950 0xffffff7f8b8cf6f8 com.vmware.kext.VMwareGfx + 0x46f8 
+	0xffffff800fb83990 0xffffff7f8b8d1d4d com.vmware.kext.VMwareGfx + 0x6d4d 
+	0xffffff800fb83a20 0xffffff800b6e277c shim_io_connect_method_scalarI_scalarO((IOExternalMethod *) method = <>, , (IOService *) object = <>, , (const io_user_scalar_t *) input = <>, , (mach_msg_type_number_t) inputCount = <>, , (io_user_scalar_t *) output = <>, , (mach_msg_type_number_t *) outputCount = <>, ) 
+	0xffffff800fb83a80 0xffffff800b6e48d3 IOUserClient::externalMethod(unsigned int, IOExternalMethodArguments*, IOExternalMethodDispatch*, OSObject*, void*)((IOUserClient *) this = <>, , (uint32_t) selector = <>, , (IOExternalMethodArguments *) args = <>, , (IOExternalMethodDispatch *) dispatch = <>, , (OSObject *) target = <>, , (void *) reference = <>, ) 
+	0xffffff800fb83bc0 0xffffff800b6e2133 is_io_connect_method((io_connect_t) connection = 0xffffff8014711200, (uint32_t) selector = 10, (io_user_scalar_t *) scalar_input = <>, , (mach_msg_type_number_t) scalar_inputCnt = <>, , (char *) inband_input = <>, , (mach_msg_type_number_t) inband_inputCnt = <>, , (mach_vm_address_t) ool_input = <>, , (mach_vm_size_t) ool_input_size = <no location, value may have been optimized out>, , (char *) inband_output = <no location, value may have been optimized out>, , (mach_msg_type_number_t *) inband_outputCnt = <no location, value may have been optimized out>, , (io_user_scalar_t *) scalar_output = <>, , (mach_msg_type_number_t *) scalar_outputCnt = <no location, value may have been optimized out>, , (mach_vm_address_t) ool_output = <>, , (mach_vm_size_t *) ool_output_size = <>, ) 
+	0xffffff800fb83d00 0xffffff7f8cdfcda3 trampline_is_io_connect_method((io_connect_t) connection = 0xffffff8014711200, (uint32_t) selector = 10, (io_user_scalar_t *) scalar_input = 0xffffff80125b6a90, (mach_msg_type_number_t) scalar_inputCnt = 2, (char *) inband_input = 0xffffff80125b6aa4 "", (mach_msg_type_number_t) inband_inputCnt = 0, (mach_vm_address_t) ool_input = 0, (mach_vm_size_t) ool_input_size = 0, (char *) inband_output = 0xffffff8011321600 "", (mach_msg_type_number_t *) inband_outputCnt = 0xffffff80113215fc, (io_user_scalar_t *) scalar_output = 0xffffff800fb83d60, (mach_msg_type_number_t *) scalar_outputCnt = 0xffffff800fb83d5c, (mach_vm_address_t) ool_output = 0, (mach_vm_size_t *) ool_output_size = 0xffffff80125b6ac4) 
+	0xffffff800fb83e10 0xffffff800b1b7f27 _Xio_connect_method((mach_msg_header_t *) InHeadP = 0xffffff8014711200, (mach_msg_header_t *) OutHeadP = 0xffffff80113215d0) 
+	0xffffff800fb83e40 0xffffff800b0e92ac ipc_kobject_server((ipc_kmsg_t) request = 0xffffff80125b6a00) 
+	0xffffff800fb83e90 0xffffff800b0c5a23 ipc_kmsg_send((ipc_kmsg_t) kmsg = <>, , (mach_msg_option_t) option = 3, (mach_msg_timeout_t) send_timeout = 0) 
+	0xffffff800fb83f10 0xffffff800b0ddc8d mach_msg_overwrite_trap((mach_msg_overwrite_trap_args *) args = <>, ) 
+	0xffffff800fb83fb0 0xffffff800b1da78a mach_call_munger64((x86_saved_state_t *) state = 0xffffff801316dc00) 
+	0x0000000000000000 0xffffff800b20e666 kernel.development`hndl_mach_scall64 + 0x16 
+	stackbottom = 0xffffff800fb83fb0
+(lldb) bt
+* thread #2: tid = 0x0324, 0xffffff800af0e058 kernel.development`memcpy + 8, name = '0xffffff80134b9ce0', queue = '0x0', stop reason = signal SIGSTOP
+    frame #0: 0xffffff800af0e058 kernel.development`memcpy + 8
+    frame #1: 0xffffff7f8b8cf6f8
+    frame #2: 0xffffff7f8b8d1d4d
+    frame #3: 0xffffff800b6e277c kernel.development`shim_io_connect_method_scalarI_scalarO(method=<unavailable>, object=<unavailable>, input=<unavailable>, inputCount=<unavailable>, output=<unavailable>, outputCount=<unavailable>) + 588 at IOUserClient.cpp:3675
+    frame #4: 0xffffff800b6e48d3 kernel.development`IOUserClient:: od(this=<unavailable>, selector=<unavailable>, args=<unavailable>, dispatch=<unavailable>, target=<unavailable>, reference=<unavailable>) + 611 at IOUserClient.cpp:4886
+  * frame #5: 0xffffff800b6e2133 kernel.development`is_io_connect_method(connection=0xffffff8014711200, selector=10, scalar_input=<unavailable>, scalar_inputCnt=<unavailable>, inband_input=<unavailable>, inband_inputCnt=<unavailable>, ool_input=<unavailable>, ool_input_size=<unavailable>, inband_output=<unavailable>, inband_outputCnt=<unavailable>, scalar_output=<unavailable>, scalar_outputCnt=<unavailable>, ool_output=<unavailable>, ool_output_size=<unavailable>) + 499 at IOUserClient.cpp:3489
+    frame #6: 0xffffff7f8cdfcda3 the_flying_circus`trampline_is_io_connect_method(connection=0xffffff8014711200, selector=10, scalar_input=0xffffff80125b6a90, scalar_inputCnt=2, inband_input=0xffffff80125b6aa4, inband_inputCnt=0, ool_input=0, ool_input_size=0, inband_output=0xffffff8011321600, inband_outputCnt=0xffffff80113215fc, scalar_output=0xffffff800fb83d60, scalar_outputCnt=0xffffff800fb83d5c, ool_output=0, ool_output_size=0xffffff80125b6ac4) + 643 at trampline_functions.c:170
+    frame #7: 0xffffff800b1b7f27 kernel.development`_Xio_connect_method(InHeadP=0xffffff8014711200, OutHeadP=0xffffff80113215d0) + 391 at device_server.c:8249
+    frame #8: 0xffffff800b0e92ac kernel.development`ipc_kobject_server(request=0xffffff80125b6a00) + 252 at ipc_kobject.c:338
+    frame #9: 0xffffff800b0c5a23 kernel.development`ipc_kmsg_send(kmsg=<unavailable>, option=3, send_timeout=0) + 275 at ipc_kmsg.c:1430
+    frame #10: 0xffffff800b0ddc8d kernel.development`mach_msg_overwrite_trap(args=<unavailable>) + 205 at mach_msg.c:487
+    frame #11: 0xffffff800b1da78a kernel.development`mach_call_munger64(state=0xffffff801316dc00) + 442 at bsd_i386.c:542
+    frame #12: 0xffffff800b20e666 kernel.development`hndl_mach_scall64 + 22
+(lldb) 
+
+
+(lldb) showthreaduserstack 0xffffff80134b9ce0
+0 FP: 0x7fff56ca6dd0 PC: 0x7fff8e73f4de
+1 FP: 0x7fff56ca7f00 PC: 0x7fff9438b16c
+2 FP: 0x7fff56ca7fa0 PC: 0x7fff9432e936
+3 FP: 0x7fff56ca7ff0 PC: 0x7fff94339617
+4 FP: 0x7fff56ca8060 PC: 0x7fff8c0bb2cf
+5 FP: 0x7fff56ca8120 PC: 0x7fff8bf3e339
+6 FP: 0x7fff56ca8630 PC: 0x7fff8c018d11
+7 FP: 0x7fff56ca8660 PC: 0x7fff8c0172c1
+8 FP: 0x7fff56ca86b0 PC: 0x7fff8c25ba9c
+9 FP: 0x7fff56cb8740 PC: 0x7fff8c0155f1
+10 FP: 0x7fff56cb8db0 PC: 0x7fff8c015e4b
+11 FP: 0x7fff56cb8dc0 PC: 0x108f47f7e
+12 FP: 0x7fff56cb8dd8 PC: 0x7fff93c845c9
