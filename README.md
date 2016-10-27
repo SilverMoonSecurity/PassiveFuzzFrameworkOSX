@@ -29,6 +29,9 @@
 
 3. How to use
 
+  IMPORTANT TIPS:
+
+  Running the kernel driver would cause sudden kernel crash so as to lose all your data. Take your own risk to use this kernel driver.
 
   3.1 Quick Start
 
@@ -46,32 +49,76 @@
 
       You would see the driver appears in the kernel module list. However, 
 
-  3.2 Full Start
+  3.2 Full Start with ThunderBolt wire
 
-    a. Prepare KDK and nvram 
+    This start guide is suitable for all Mac OSX machine(e.g. MacPro, MacAir, Mac Mini).
 
-      I. Download KDK_10.11.6_15G31.kdk and install on your Mac machine
+    This solution require for another debugger OSX machine and extra ThunderBolt wire.
 
-      II. Copy kernel.development to system folder and synchronise kernel cache
+    1. On  target(or debugee) OSX machine:
 
-        sh-3.2# cp -fr /Library/Developer/KDKs/KDK_10.11.6_15G31.kdk/System/Library/Kernels/kernel.development* /System/Library/Kernels/
+      a. Prepare KDK and nvram 
 
-        sh-3.2# kextcache -invalid /
+        I. Download KDK_10.11.6_15G31.kdk (take this KDK for example) and install on your Mac machine
 
-        sh-3.2# reboot
+        II. Copy kernel.development to system folder and synchronise kernel cache
 
-      III. Set up boot-args
+          sh-3.2# cp -fr /Library/Developer/KDKs/KDK_10.11.6_15G31.kdk/System/Library/Kernels/kernel.development* /System/Library/Kernels/
 
-        sh-3.2# nvram boot-args="debug=0x566 kdp_match_name=firewire fwkdp=0x8000 pmuflags=1 kext-dev-mode=1  -v"
+          sh-3.2# kextcache -invalid /
 
-        sh-3.2# reboot
+          sh-3.2# reboot
+
+        III. Set up boot-args for debugging 
+
+          sh-3.2# nvram boot-args="debug=0x566 kdp_match_name=firewire fwkdp=0x8000 pmuflags=1 kext-dev-mode=1  -v"
+
+          sh-3.2# reboot
 
 
-    b. Load driver for passive fuzz
+      b. Load driver for passive fuzz
 
-      sh-3.2# chown -R root:wheel ./pasive_kernel_fuzz.kext
+        sh-3.2# chown -R root:wheel ./pasive_kernel_fuzz.kext
 
-      sh-3.2# kextutil ./pasive_kernel_fuzz.kext
+        sh-3.2# kextutil ./pasive_kernel_fuzz.kext
 
 
-    c. Proberbly your Mac Machine would kernel crash 
+      c. Proberbly your Mac Machine would kernel crash waiting for further deubugging
+
+
+    2. On  debugger OSX machine:
+
+      IMPORTANT TIP:
+        
+        Always keep the ThunderBolt connected with the two machine always because plug and play (recognize) is NOT supported for the crashed kernel.
+
+      a. Prepare KDK
+
+        I. Download KDK_10.11.6_15G31.kdk (take this KDK for example) and install on your Mac machine
+
+        This step is not necessary but strongly recommented. When lldb in furthur following steps, lldb would match *.dSYM symbol file between debugee machine and debugger machine. Otherwise, symbol info would NOT be shown during your debugging.
+
+      b.   Debug the crashed target machine
+
+          I. Launch fwkdp service
+
+          flyic-pro:pasive_kernel_fuzz.kext root1$ fwkdp
+
+          II. lldb debug
+
+          sh-3.2# cd /Library/Developer/KDKs/KDK_10.11.6_15G31.kdk/System/Library/Kernels
+
+          sh-3.2# lldb ./kernel.development
+
+          (lldb) kdp-remote localhost
+
+          The debugger would wait until the target machine  crashes, and then you can type any command for debugging including collect core dump file.
+
+
+
+  3.3 Full Start with Wire LAN
+
+      Because only lagecy OSX machine support Wire LAN (e.g. Old MacMini), this kind of debugging is not popular.
+
+      To be done
+   
