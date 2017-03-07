@@ -124,6 +124,10 @@
       To be done
    
 4. Known issue:
+
    4.1 MacOS 10.12 MachO format parse error
+
    process_kernel_mach_header(void *kernel_header, struct kernel_info *kinfo)
+
    could not analyze the machO file format in 10.12 which may be different with 10.11 or before so as to cause kext load fail.  
+   
