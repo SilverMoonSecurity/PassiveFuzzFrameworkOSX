@@ -123,9 +123,19 @@
 
       To be done
    
-4. Known issue:
+4. External Resource
+    
+    4.1. Crashes
 
-   4.1 MacOS 10.12 MachO format parse error
+    Ever collected core dump files, lldb debug logs, poc and so forth (keep updating, about 100GB).
+
+    External link:
+
+    http://pan.baidu.com/s/1dEJO3TJ
+    
+5. Known issue:
+
+   5.1 MacOS 10.12 MachO format parse error
 
    process_kernel_mach_header(void *kernel_header, struct kernel_info *kinfo)
 
