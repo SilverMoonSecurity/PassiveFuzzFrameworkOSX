@@ -1,3 +1,7 @@
+Pay me if you like this paper:)
+![image](https://github.com/SilverMoonSecurity/payme/blob/master/WeChat_payme.jpg)
+
+
 1. What is it
   
    This framework is for fuzzing OSX kernel vulnerability based on passive inline hook mechanism in kernel mode.
